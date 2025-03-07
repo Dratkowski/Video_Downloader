@@ -31,7 +31,7 @@ When creating a new program, it is a good idea to make a virtual enviornment to 
 
          yt-dlp_venv\Scripts\activate
 STEP 2) 
-Now that your venv is active, you can install Whisper within this venv. NOTE: if you close the terminal you will need to reactivate the venv. Make sure that you have downloaded the file "requirements.txt" and place it in your directory
+Now that your venv is active, you can install yt-dlp within this venv. NOTE: if you close the terminal you will need to reactivate the venv. Make sure that you have downloaded the file "requirements.txt" and place it in your directory
       Installing dependencies:
 
     pip install -r requirements.txt
