@@ -8,7 +8,7 @@ import webbrowser
 from urllib.parse import urlparse
 import os
 
-# Function to extract video file paths
+# Function to extract video file paths from a general webpage
 def extract_video_links(url):
     try:
         # Send GET request to the URL
@@ -38,18 +38,23 @@ def on_search_button_click():
         messagebox.showwarning("Input Error", "Please enter a URL")
         return
 
-    # Extract video links
-    video_links = extract_video_links(url)
-
     # Clear the dropdown
     video_link_combobox.set('')
     video_link_combobox['values'] = []
 
-    # Populate the dropdown with video links
-    if video_links:
-        video_link_combobox['values'] = video_links
+    # Check if the URL contains 'facebook.com'
+    if 'facebook.com' in url:
+        # If it's a Facebook URL, just populate the dropdown with the user-inputted URL
+        video_link_combobox['values'] = [url]
     else:
-        messagebox.showinfo("No Results", "No video links found.")
+        # Extract video links from other websites
+        video_links = extract_video_links(url)
+
+        # Populate the dropdown with video links
+        if video_links:
+            video_link_combobox['values'] = video_links
+        else:
+            messagebox.showinfo("No Results", "No video links found.")
 
 # Function to execute yt-dlp with the given URL and custom file name
 def download_video():
