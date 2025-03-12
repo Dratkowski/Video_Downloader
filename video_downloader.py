@@ -9,7 +9,7 @@ import os
 def download_video():
     url = url_entry.get()  # Get the URL from the input field
     custom_filename = filename_entry.get()  # Get the custom file name from the entry box
-    download_option = download_option_combobox.get()  # Get the selected option ("Youtube", ".m3u8", or "MP4")
+    download_option = download_option_combobox.get()  # Get the selected option ("Youtube", ".m3u8", or "MP4/Facebook")
     
     # Get the user's Desktop path dynamically
     desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
@@ -29,6 +29,10 @@ def download_video():
 
     # If .m3u8 is selected, automatically add ".mp4" to the file name
     elif download_option == ".m3u8" and not custom_filename.endswith(".mp4"):
+        custom_filename += ".mp4"
+    
+    # If MP4/Facebook is selected, add ".mp4" to the file name if not already present
+    elif download_option == "MP4/Facebook" and not custom_filename.endswith(".mp4"):
         custom_filename += ".mp4"
     
     if url:
@@ -106,11 +110,11 @@ filename_entry.pack(padx=20, pady=10)
 # Set default file name based on URL (this can be changed later by the user) 
 filename_entry.insert(0, "default_filename") 
 
-# Dropdown box to select "Youtube", ".m3u8", or "MP4"
+# Dropdown box to select "Youtube", ".m3u8", or "MP4/Facebook"
 download_option_label = tk.Label(root, text="Select download option:") 
 download_option_label.pack(pady=10) 
 
-download_option_combobox = ttk.Combobox(root, values=["Youtube", ".m3u8", "MP4"], state="readonly") 
+download_option_combobox = ttk.Combobox(root, values=["Youtube", ".m3u8", "MP4/Facebook"], state="readonly") 
 download_option_combobox.pack(padx=20, pady=10)
 download_option_combobox.set("Youtube")  # Set default option
 
