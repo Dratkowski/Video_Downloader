@@ -162,7 +162,7 @@ video_link_combobox = ttk.Combobox(root, state="readonly", width=100)
 video_link_combobox.pack(padx=20, pady=10)
 
 # File name label and entry box 
-filename_label = tk.Label(root, text="Enter custom file name")
+filename_label = tk.Label(root, text="Enter custom file name: \n File will be downloaded to the desktop")
 filename_label.pack(pady=10) 
 
 filename_entry = tk.Entry(root, width=100) 
@@ -172,12 +172,12 @@ filename_entry.pack(padx=20, pady=10)
 filename_entry.insert(0, "default_filename")  
 
 # Dropdown box to select "Youtube", ".m3u8", or "MP4/Social Media Videos" 
-download_option_label = tk.Label(root, text="Select download option:") 
+download_option_label = tk.Label(root, text="Select video option \n Use the file extention of your video: \n (Example: if your video is a .mp4 select MP4)") 
 download_option_label.pack(pady=10)  
 
 download_option_combobox = ttk.Combobox(root, values=["Youtube", ".m3u8", "MP4/Social Media Videos"], state="readonly")  
 download_option_combobox.pack(padx=20, pady=10) 
-download_option_combobox.set("Youtube")  # Set default option 
+download_option_combobox.set("MP4/Social Media Videos")  # Set default option 
 
 # Button to start the download 
 download_button = tk.Button(root, text="Download", command=download_video) 
