@@ -1,11 +1,11 @@
 # Video_Downloader
 yt-dlp (https://github.com/yt-dlp/yt-dlp)
 
-yt-dlp is a simple program that downloads a variety to videos from websites (including Youtube.com). Typiclaly, in order to download Youtube videos, a paid subscription to Youtube Premium. It is a very simple program to install. Just ensure python is installed. See Transcription_Tool repo for more on python.
+yt-dlp is a simple program that downloads a variety to videos from websites (including Youtube, Facebook, Instagram and more). Typiclaly, in order to download Youtube videos, a paid subscription to Youtube Premium. It is a very simple program to install. Just ensure python is installed. See Transcription_Tool repo or the potable python repos for more on python.
 
 STEP 1: Creat a Virtual Environment
 When creating a new program, it is a good idea to make a virtual enviornment to run the program. This environment is where all of the libraries and dependencies will be installed. It Keep things seperate from other programs so dependencies are not impacted by other tools. 
-      Dependencies/Libraries: Simply put these are tools that other programers and coders have developed to run sertain things with         the code. These help you do a wide variety of things so you do not have to do all the coding yourself. 
+      Dependencies/Libraries: Simply put these are tools that other programers and coders have developed to run sertain things with the code. These help you do a wide variety of things so you do not have to do all the coding yourself. 
       
   STEP 1A: Set up a virtual environment (venv)
   
