@@ -41,7 +41,7 @@ def on_search_button_click():
     # Clear the dropdown
     video_link_combobox.set('')
     video_link_combobox['values'] = []
- 
+
     # Check if the URL contains 'facebook.com' 
     if 'facebook.com' in url: 
         # If it's a Facebook URL, just populate the dropdown with the user-inputted URL 
@@ -49,12 +49,14 @@ def on_search_button_click():
     else: 
         # Extract video links from other websites 
         video_links = extract_video_links(url) 
- 
-        # Populate the dropdown with video links 
+
+        # Populate the dropdown with video links
         if video_links: 
             video_link_combobox['values'] = video_links 
         else: 
-            messagebox.showinfo("No Results", "No video links found.") 
+            # If no video links found, set the user input URL as the default
+            video_link_combobox['values'] = [url]
+            messagebox.showinfo("No Results", "No video links found. Using the entered URL as the default.")  
 
 # Function to execute yt-dlp with the given URL and custom file name 
 def download_video(): 
@@ -169,11 +171,11 @@ filename_entry.pack(padx=20, pady=10)
 # Set default file name based on URL (this can be changed later by the user)  
 filename_entry.insert(0, "default_filename")  
 
-# Dropdown box to select "Youtube", ".m3u8", or "MP4/Facebook" 
+# Dropdown box to select "Youtube", ".m3u8", or "MP4/Social Media Videos" 
 download_option_label = tk.Label(root, text="Select download option:") 
 download_option_label.pack(pady=10)  
 
-download_option_combobox = ttk.Combobox(root, values=["Youtube", ".m3u8", "MP4/Facebook"], state="readonly")  
+download_option_combobox = ttk.Combobox(root, values=["Youtube", ".m3u8", "MP4/Social Media Videos"], state="readonly")  
 download_option_combobox.pack(padx=20, pady=10) 
 download_option_combobox.set("Youtube")  # Set default option 
 
