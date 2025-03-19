@@ -59,66 +59,63 @@ def on_search_button_click():
             messagebox.showinfo("No Results", "No video links found. Using the entered URL as the default.")  
 
 # Function to execute yt-dlp with the given URL and custom file name 
-def download_video(): 
-    url = video_link_combobox.get()  # Get the selected video link 
-    custom_filename = filename_entry.get()  # Get the custom file name from the entry box 
-    download_option = download_option_combobox.get()  # Get the selected option ("Youtube", ".m3u8", or "MP4/Facebook") 
-
-    # Get the user's Desktop path dynamically 
-    desktop_path = os.path.join(os.path.expanduser("~"), "Desktop") 
-
-    if not custom_filename: 
-        # If no custom filename, use the default based on the URL (just use the domain for simplicity) 
-        parsed_url = urlparse(url) 
-        custom_filename = parsed_url.netloc 
-
-    # Update custom_filename to save it on the Desktop 
-    custom_filename = os.path.join(desktop_path, custom_filename) 
-
-    # If the "MP4" option is selected, check if the URL is already .mp4 and keep the filename 
-    if download_option == "MP4" and url.lower().endswith(".mp4"): 
-        custom_filename = custom_filename if custom_filename.endswith(".mp4") else custom_filename + ".mp4" 
-        download_option = "MP4"  # Keep it as MP4 for download option 
-
-    # If .m3u8 is selected, automatically add ".mp4" to the file name 
-    elif download_option == ".m3u8" and not custom_filename.endswith(".mp4"): 
-        custom_filename += ".mp4" 
-
-    # If MP4/Facebook is selected, add ".mp4" to the file name if not already present
+def download_video():  
+    url = video_link_combobox.get()  # Get the selected video link  
+    custom_filename = filename_entry.get()  # Get the custom file name from the entry box  
+    download_option = download_option_combobox.get()  # Get the selected option ("Youtube", ".m3u8", or "MP4/Facebook")  
+ 
+    # Get the user's Desktop path dynamically  
+    desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")  
+  
+    if not custom_filename:  
+        # If no custom filename, use the default based on the URL (just use the domain for simplicity)  
+        parsed_url = urlparse(url)  
+        custom_filename = parsed_url.netloc  
+ 
+    # Update custom_filename to save it on the Desktop  
+    custom_filename = os.path.join(desktop_path, custom_filename)  
+ 
+    # Check if URL already ends with ".mp4" and ensure filename extension is correct
+    if url.lower().endswith(".mp4"):
+        # If the URL is .mp4, make sure the filename has .mp4 extension
+        custom_filename = custom_filename if custom_filename.endswith(".mp4") else custom_filename + ".mp4"
+        download_option = "MP4"  # Keep it as MP4 for download option
+    elif download_option == ".m3u8" and not custom_filename.endswith(".mp4"):
+        custom_filename += ".mp4"
     elif download_option == "MP4/Facebook" and not custom_filename.endswith(".mp4"):
         custom_filename += ".mp4"
 
-    if url: 
-        try: 
-            # Run yt-dlp command with the URL entered and the custom filename 
-            subprocess.run(["yt-dlp", "-o", custom_filename, url]) 
-             
-            # If Youtube is selected, convert the downloaded .webm to .mp4 
-            if download_option == "Youtube": 
-                webm_file = f"{custom_filename}.webm" 
-                mp4_file = f"{custom_filename}.mp4" 
-                # Run ffmpeg to convert .webm to .mp4 
-                subprocess.run(["ffmpeg", "-i", webm_file, mp4_file]) 
-                 
-                # Optionally, remove the original .webm file after conversion 
-                os.remove(webm_file)  # Removes the .webm file after conversion 
-                 
-                # Update result label with the new .mp4 file path 
-                result_text = f"Download and conversion finished: {mp4_file}" 
-            else: 
-                result_text = f"Download finished: {custom_filename}" 
-             
-            # Display the result with the link to the file 
-            result_label.config(text=result_text, fg="blue", cursor="hand2") 
-            result_label.bind("<Button-1>", lambda e: open_link(custom_filename)) 
-             
-            # Show the "Run Again" button after a successful download 
-            run_again_button.pack(pady=10) 
- 
-        except Exception as e: 
-            result_label.config(text=f"Error: {e}") 
-    else: 
-        result_label.config(text="Please enter a valid URL or file:") 
+    if url:  
+        try:  
+            # Run yt-dlp command with the URL entered and the custom filename  
+            subprocess.run(["yt-dlp", "-o", custom_filename, url])  
+              
+            # If Youtube is selected, convert the downloaded .webm to .mp4  
+            if download_option == "Youtube":  
+                webm_file = f"{custom_filename}.webm"  
+                mp4_file = f"{custom_filename}.mp4"  
+                # Run ffmpeg to convert .webm to .mp4  
+                subprocess.run(["ffmpeg", "-i", webm_file, mp4_file])  
+                  
+                # Optionally, remove the original .webm file after conversion  
+                os.remove(webm_file)  # Removes the .webm file after conversion  
+                  
+                # Update result label with the new .mp4 file path  
+                result_text = f"Download and conversion finished: {mp4_file}"  
+            else:  
+                result_text = f"Download finished: {custom_filename}"  
+              
+            # Display the result with the link to the file  
+            result_label.config(text=result_text, fg="blue", cursor="hand2")  
+            result_label.bind("<Button-1>", lambda e: open_link(custom_filename))  
+              
+            # Show the "Run Again" button after a successful download  
+            run_again_button.pack(pady=10)  
+
+        except Exception as e:  
+            result_label.config(text=f"Error: {e}")  
+    else:  
+        result_label.config(text="Please enter a valid URL or file:")
 
 # Function to open the path or URL when the label is clicked  
 def open_link(link):  
