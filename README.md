@@ -90,3 +90,22 @@ You can also open a Notepad copy paste:
     pause
 
 Save as a .bat file on your desktop
+
+
+If this is not working: download 
+           
+       Full_scruber_and Download.exe 
+and 
+            
+       yt-dlp.exe
+            
+into the same folder. these can be found in this repository.
+You will also need to download 
+           
+      ffmpeg.exe
+            
+which is not in this repositotry. 
+
+       https://www.gyan.dev/ffmpeg/builds/
+
+Download the latest version .7z file and find the ffmpeg.exe. generally in ./bin 
